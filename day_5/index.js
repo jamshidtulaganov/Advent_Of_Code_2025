@@ -46,7 +46,7 @@ function partOne() {
 function partTwo() {
     // Convert ranges to intervals and merge overlapping ones
     const intervals = productIdsRanges.map(range => {
-        const [start, end] = range.split('-').map(num => BigInt(num));
+        const [start, end] = range.split('-').map(num => Number(num));
         return { start, end };
     });
 
@@ -62,7 +62,7 @@ function partTwo() {
         const next = intervals[i];
 
         // Check if intervals overlap or are adjacent
-        if (next.start <= current.end + 1n) {
+        if (next.start <= current.end + 1) {
             // Merge intervals
             current.end = current.end > next.end ? current.end : next.end;
         } else {
@@ -76,9 +76,9 @@ function partTwo() {
     console.log(merged)
 
     // Calculate total count across all merged intervals
-    let totalCount = 0n;
+    let totalCount = 0;
     for (const interval of merged) {
-        totalCount += (interval.end - interval.start + 1n);
+        totalCount += (interval.end - interval.start + 1);
     }
 
     return totalCount;
